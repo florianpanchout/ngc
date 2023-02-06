@@ -21,6 +21,14 @@ jobs:
       - run: yarn install --immutable
       - run: yarn compile
       - run: yarn test
+  log: 
+     runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/github-script@v5
+       with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            console.log(context)
   comment:
     runs-on: ubuntu-22.04
     steps:
