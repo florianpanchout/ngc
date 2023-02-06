@@ -37,6 +37,6 @@ jobs:
           node-version: 16
           cache: 'yarn'
       - run: yarn add @octokit/action
-      - run: node .github/actions/my-script.js
+      - run: node .github/actions/postComment.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
