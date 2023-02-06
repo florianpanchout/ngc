@@ -20,8 +20,17 @@ jobs:
           cache: 'yarn'
       - run: yarn install --immutable
       - run: yarn compile
-  test:
-    needs: compile
+      - run: yarn test
+  comment:
     runs-on: ubuntu-22.04
     steps:
-      - run: yarn test
+      - uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for reporting!'
+            })
