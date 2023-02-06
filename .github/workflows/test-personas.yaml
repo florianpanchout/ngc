@@ -41,3 +41,4 @@ jobs:
       - run: node .github/actions/postComment.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: 1
