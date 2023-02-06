@@ -32,12 +32,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/github-script@v5
+      - uses: actions/setup-node@v3
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
-            })
+          node-version: 16
+          cache: 'yarn'
+      - run: yarn add @octokit/action
+      - run: node .github/actions/my-script.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
