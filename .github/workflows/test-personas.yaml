@@ -22,5 +22,6 @@ jobs:
       - run: yarn compile
   test:
     needs: compile
+    runs-on: ubuntu-22.04
     steps:
       - run: yarn test
