@@ -8,6 +8,6 @@ octokit
 	.request('POST /repos/{owner}/{repo}/issues', {
 		owner,
 		repo,
-		title: 'My test issue',
+		title: 'My test issue :)',
 	})
 	.then((res) => console.log(res))
