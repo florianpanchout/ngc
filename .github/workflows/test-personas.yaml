@@ -8,7 +8,6 @@ on:
   push:
     branches:
       - '!master'
-
 jobs:
   compile:
     runs-on: ubuntu-22.04
@@ -21,11 +20,11 @@ jobs:
       - run: yarn install --immutable
       - run: yarn compile
       - run: yarn test
-  log: 
-     runs-on: ubuntu-22.04
+  log:
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/github-script@v5
-       with:
+        with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             console.log(context)
