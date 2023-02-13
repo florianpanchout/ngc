@@ -31,4 +31,9 @@ for (persona of personasRules) {
 	engine.setSituation(validPersonaRulesObject)
 	results[persona.nom] = engine.evaluate('bilan').nodeValue
 }
-console.log(results)
+
+console.log('| Nom | Total |')
+console.log('|:-----|:------:|')
+for (let name in results) {
+	console.log(`|${name}|${results[name]}|`)
+}
