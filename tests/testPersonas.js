@@ -57,9 +57,11 @@ fetch('https://data.nosgestesclimat.fr/co2-model.FR-lang.fr.json')
 		console.log('| Nom | Total (PR) | Total (Prod) |')
 		console.log('|:-----|:------:|:------:|')
 		for (let name in results) {
-			const warning = results[name] !== prodResults[name] ? '**' : ''
+			const different = results[name] !== prodResults[name]
 			console.log(
-				`|${warning}${name}${warning}|${warning}${results[name]}${warning}|${warning}${prodResults[name]}${warning}|`
+				`|${different ? '⚠️' : '✅'} ${name}|${results[name]}|${
+					prodResults[name]
+				}|`
 			)
 		}
 	})
