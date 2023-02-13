@@ -11,6 +11,8 @@ on:
 jobs:
   compile:
     runs-on: ubuntu-22.04
+    outputs:
+      output: ${{ steps.test.outputs.test }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -19,17 +21,11 @@ jobs:
           cache: 'yarn'
       - run: yarn install --immutable
       - run: yarn compile
-      - run: yarn test
-  log:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/github-script@v5
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            console.log(context)
+      - id: test
+        run: yarn test
   comment:
     runs-on: ubuntu-22.04
+    needs: compile
     permissions: write-all
     steps:
       - uses: actions/checkout@v3
@@ -38,8 +34,9 @@ jobs:
           node-version: 16
           cache: 'yarn'
       - run: yarn add @octokit/action
+      - run: echo ${{needs.compile.outputs.output}}
       - run: node .github/actions/postComment.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: 1
-          DATA: 'coucou'
+          DATA: needs.compile.outputs.output
