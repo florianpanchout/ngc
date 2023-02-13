@@ -24,7 +24,10 @@ jobs:
       - id: test
         run: |
           # Compiles the model and stores the result -- with escaped special characters.
-          body="$(yarn test 2> /dev/null"
+          body="$(yarn test 2> /dev/null)"
+          body="${body//'%'/'%25'}"
+          body="${body//$'\n'/'%0A'}"
+          body="${body//$'\r'/'%0D'}"
           echo "::set-output name=result::${body}"
   comment:
     runs-on: ubuntu-22.04
