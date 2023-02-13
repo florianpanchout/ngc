@@ -45,4 +45,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: 1
-          DATA: { { needs.compile.outputs.test-result } }
+          DATA: needs.compile.outputs.test-result
