@@ -53,7 +53,6 @@ fetch('https://data.nosgestesclimat.fr/co2-model.FR-lang.fr.json')
 			prodEngine.setSituation(validPersonaRulesObject)
 			prodResults[persona.nom] = prodEngine.evaluate('bilan').nodeValue
 		}
-		console.log('yolo 2')
 		console.log('| Nom | Total (PR) | Total (Prod) |')
 		console.log('|:-----|:------:|:------:|')
 		for (let name in results) {
@@ -63,10 +62,9 @@ fetch('https://data.nosgestesclimat.fr/co2-model.FR-lang.fr.json')
 			)
 		}
 	})
-/*
+
 console.log('| Nom | Total |')
 console.log('|:-----|:------:|')
 for (let name in results) {
 	console.log(`|${name}|${results[name]}|`)
 }
-*/
