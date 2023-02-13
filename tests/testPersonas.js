@@ -30,7 +30,7 @@ for (persona of personasRules) {
 	results[persona.nom] = engine.evaluate('bilan').nodeValue
 }
 
-fetch('https://data.nosgestesclimat.fr/co2-fr.json')
+fetch('https://data.nosgestesclimat.fr/co2-model.FR-lang.fr.json')
 	.then((res) => res.json())
 	.then((prodRules) => {
 		prodEngine = new Engine(prodRules)
