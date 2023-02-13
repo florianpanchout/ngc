@@ -52,8 +52,8 @@ jobs:
           echo "::set-output name=result::${body}"
       - id: test-personas
         run: |
-          # Compiles the model and stores the result -- with escaped special characters.
-          body="$(yarn test 2> /dev/null)"
+          # Test the personas bilans against production
+          body="$(yarn test 2> /dev/null| tail --lines=+3 | head --lines=-1)"
           body="${body//'%'/'%25'}"
           body="${body//$'\n'/'%0A'}"
           body="${body//$'\r'/'%0D'}"
