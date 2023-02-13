@@ -3,6 +3,7 @@
 
   Command: yarn test
 */
+require('isomorphic-fetch')
 
 const Engine = require('publicodes').default
 
@@ -29,7 +30,7 @@ for (persona of personasRules) {
 	engine.setSituation(validPersonaRulesObject)
 	results[persona.nom] = engine.evaluate('bilan').nodeValue
 }
-/*
+
 fetch('https://data.nosgestesclimat.fr/co2-model.FR-lang.fr.json')
 	.then((res) => res.json())
 	.then((prodRules) => {
@@ -62,9 +63,10 @@ fetch('https://data.nosgestesclimat.fr/co2-model.FR-lang.fr.json')
 			)
 		}
 	})
-*/
+/*
 console.log('| Nom | Total |')
 console.log('|:-----|:------:|')
 for (let name in results) {
 	console.log(`|${name}|${results[name]}|`)
 }
+*/
