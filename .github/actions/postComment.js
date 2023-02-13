@@ -11,5 +11,6 @@ octokit
 		repo,
 		issue_number: 1,
 		title: 'My test issue :)',
+		body: process.env.DATA,
 	})
 	.then((res) => console.log(res))
