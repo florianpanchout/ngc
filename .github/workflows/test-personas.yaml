@@ -12,7 +12,7 @@ jobs:
   compile:
     runs-on: ubuntu-22.04
     outputs:
-      output: ${{ steps.test.outputs.test }}
+      test-result: ${{ steps.test.outputs.result }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -22,7 +22,14 @@ jobs:
       - run: yarn install --immutable
       - run: yarn compile
       - id: test
-        run: yarn test
+        run: echo yarn test
+        run: |
+          # Compiles the model and stores the result -- with escaped special characters.
+          body="$(yarn test 2> /dev/null"
+          body="${body//'%'/'%25'}"
+          body="${body//$'\n'/'%0A'}"
+          body="${body//$'\r'/'%0D'}"
+          echo "::set-output name=result::${body}"
   comment:
     runs-on: ubuntu-22.04
     needs: compile
@@ -34,9 +41,10 @@ jobs:
           node-version: 16
           cache: 'yarn'
       - run: yarn add @octokit/action
-      - run: echo ${{needs.compile.outputs.output}}
+      - run: echo ${{ needs.compile.outputs.test-result }}
       - run: node .github/actions/postComment.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: 1
-          DATA: needs.compile.outputs.output
+          DATA: {{ needs.compile.outputs.test-result }}
+
