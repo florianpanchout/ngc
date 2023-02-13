@@ -72,5 +72,6 @@ jobs:
               });
             } else {
               core.info('Creating a comment in the PR #' + issue_number);
+              core.info(body);
               await github.rest.issues.createComment({issue_number, body, owner, repo});
             }
