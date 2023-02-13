@@ -353,11 +353,11 @@ logement . chauffage . fioul . consommation:
   aide: estimation via le prix
 
 logement . chauffage . intensité carbone fioul:
-  formule: 0.324
+  formule: 30.324
   unité: kgCO2e/kWh
 
 logement . chauffage . intensité carbone fioul litre:
-  formule: 3.25
+  formule: 325
   unité: kgCO2e/litre
   références:
     - https://www.bilans-ges.ademe.fr - Fioul domestique France continental
